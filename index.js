@@ -4,10 +4,10 @@ const app = express();
 const dataPath = "./data/";
 
 app.use(express.urlencoded({ extended: true }));
-app.get("/", async function (req, res) {
+app.get("/", async function (__, res) {
   const foundPeople = await peopleDir();
   res.send(
-    `Archivos Disponibles : ${foundPeople}
+    `Archivos Disponibles : ${foundPeople.length}
         <br> 
         <a href="/files">Ver Archivos</a>
         <br>
@@ -15,7 +15,7 @@ app.get("/", async function (req, res) {
   );
 });
 
-app.get("/create", async function (req, res) {
+app.get("/create", async function (__, res) {
   res.sendFile(__dirname + "/create.html");
 });
 
@@ -41,7 +41,7 @@ app.post("/create", async function (req, res) {
   }
 });
 
-app.get("/files", async function (req, res) {
+app.get("/files", async function (__, res) {
   const foundPeople = await peopleDir();
   let refs = ``;
   for (people of foundPeople) {
@@ -74,9 +74,40 @@ app.get("/files/:name", async function (req, res) {
         <br> 
         Pais : ${json.pais}
         <br> <br> 
-        <a href="/">Volver</a>
+        <a href="/files/${people}/delete">Eliminar</a>
+        <br> <br> 
+        <a href="/files">Volver</a>
         `
   );
+});
+
+app.get("/files/:name", async function (req, res) {
+  const people = req.params.name;
+  const file = await fs.readFile(`${dataPath + people}.json`, "utf-8");
+  const json = JSON.parse(file);
+  res.send(
+    `
+        Informacion del archivo "${people}.json"
+        <br> 
+        Nombre: ${json.nombre}
+        <br> 
+        Apellido: ${json.apellido}
+        <br> 
+        Numero Telefonico : ${json.numero}
+        <br> 
+        Pais : ${json.pais}
+        <br> <br> 
+        <a href="/files/${people}/delete">Eliminar</a>
+        <br> <br> 
+        <a href="/files">Volver</a>
+        `
+  );
+});
+
+app.get("/files/:name/delete", async function (req, res) {
+    const people = req.params.name;
+    fs.unlink(dataPath + people + ".json");
+    res.redirect("/files");
 });
 
 app.listen(process.env.PORT || 3000, function () {
