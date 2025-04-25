@@ -8,7 +8,7 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/", async function(req, res) {
     const foundPeople = await peopleDir();
     res.send(
-        `Archivos Disponibles : ${foundPeople} 
+        `Archivos Disponibles : ${foundPeople}
         <br> 
         <a href="/files">Ver Archivos</a>
         <br>
