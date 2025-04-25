@@ -78,8 +78,8 @@ app.get("/files/:name", async function(req, res) {
         `);
 });
 
-app.listen(3000, function() {
-    console.log(`App en puerto 3000`)
+app.listen(process.env.PORT || 3000, function() {
+    console.log(`App en puerto`, process.env.PORT || 3000)
 });
 
 async function peopleDir() {
