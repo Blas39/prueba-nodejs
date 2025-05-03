@@ -1,0 +1,26 @@
+<div
+  style="position: relative; height: 100vh; font-family: sans-serif; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;"
+>
+  <div
+    style="padding: 2rem; background-color: white; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1); z-index: 0;"
+  >
+
+    <h1 style="text-align: center; font-family: sans-serif;"> Crear Archivo</h1>
+    <form style="text-align: center;" method="POST" action="/create">
+      <input type="text" name="nombre" placeholder="Nombre" required />
+      <input type="text" name="apellido" placeholder="Apellido" required />
+      <input
+        type="text"
+        maxlength="9"
+        name="numero"
+        placeholder="Numero"
+        required
+      />
+      <input type="text" name="pais" placeholder="Pais" required />
+      <button type="submit">Guardar</button>
+    </form>
+    <br />
+    <a href="/files">Volver</a>
+
+  </div>
+</div>

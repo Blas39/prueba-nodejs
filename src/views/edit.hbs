@@ -1,0 +1,50 @@
+<div
+  style="position: relative; height: 100vh; font-family: sans-serif; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;"
+>
+  <div
+    style="padding: 2rem; background-color: white; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1); z-index: 0;"
+  >
+
+    <h1 style="text-align: center; font-family: sans-serif;">Editar Archivo</h1>
+    <form
+      style="text-align: center;"
+      method="POST"
+      action="/files/{{persona._id}}/edit"
+    >
+      <input
+        type="text"
+        name="nombre"
+        value="{{persona.nombre}}"
+        placeholder="Nombre"
+        required
+      />
+      <input
+        type="text"
+        name="apellido"
+        value="{{persona.apellido}}"
+        placeholder="Apellido"
+        required
+      />
+      <input
+        type="text"
+        maxlength="9"
+        name="numero"
+        value="{{persona.numero}}"
+        placeholder="Número"
+        required
+      />
+      <input
+        type="text"
+        name="pais"
+        value="{{persona.pais}}"
+        placeholder="País"
+        required
+      />
+      <button type="submit">Guardar</button>
+    </form>
+
+    <br />
+    <a href="/files/{{persona._id}}/delete">Eliminar</a><br />
+    <a href="/files">Volver</a>
+  </div>
+</div>
